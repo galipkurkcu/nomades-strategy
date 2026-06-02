@@ -1483,5 +1483,64 @@ Referans: Kazimir Malevich minimalizmi + medical illustration netliği</p>
   </div>
 </footer>
 
+
+<div id="pw-gate" style="
+  position:fixed;inset:0;z-index:9999;
+  background:#1E1A18;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'DM Sans',sans-serif;
+">
+  <div style="text-align:center;padding:40px 32px;max-width:340px;width:100%;">
+    <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;color:#FAF7F4;letter-spacing:.06em;margin-bottom:8px;">Diyetisyen Sila Sarac</div>
+    <div style="font-size:12px;color:rgba(250,247,244,.4);letter-spacing:.1em;text-transform:uppercase;margin-bottom:40px;">Strateji Dokumani</div>
+    <input id="pw-input" type="password" placeholder="Sifre" autocomplete="off" style="
+      width:100%;box-sizing:border-box;
+      background:rgba(250,247,244,.06);
+      border:1px solid rgba(250,247,244,.15);
+      border-radius:6px;
+      padding:14px 18px;
+      font-family:'DM Sans',sans-serif;font-size:15px;font-weight:300;
+      color:#FAF7F4;
+      outline:none;
+      text-align:center;
+      margin-bottom:12px;
+      transition:border-color .2s;
+    " oninput="document.getElementById('pw-err').style.display='none'">
+    <div id="pw-err" style="display:none;font-size:12px;color:#C4557A;margin-bottom:12px;">Yanlis sifre.</div>
+    <button onclick="checkPw()" style="
+      width:100%;padding:14px;
+      background:#A8325A;border:none;border-radius:6px;
+      font-family:'DM Sans',sans-serif;font-size:14px;font-weight:400;letter-spacing:.05em;
+      color:#FAF7F4;cursor:pointer;
+      transition:background .2s;
+    " onmouseover="this.style.background='#7D2243'" onmouseout="this.style.background='#A8325A'">Giris</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  if(sessionStorage.getItem('ds_auth')==='1'){
+    document.getElementById('pw-gate').style.display='none';
+  }
+  document.getElementById('pw-input').addEventListener('keydown',function(e){
+    if(e.key==='Enter') checkPw();
+  });
+})();
+function checkPw(){
+  var v=document.getElementById('pw-input').value;
+  if(v==='gunesila'){
+    sessionStorage.setItem('ds_auth','1');
+    var g=document.getElementById('pw-gate');
+    g.style.transition='opacity .3s';
+    g.style.opacity='0';
+    setTimeout(function(){g.style.display='none';},300);
+  } else {
+    document.getElementById('pw-err').style.display='block';
+    document.getElementById('pw-input').value='';
+    document.getElementById('pw-input').focus();
+  }
+}
+</script>
+
 </body>
 </html>
